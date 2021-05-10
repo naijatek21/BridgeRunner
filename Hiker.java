@@ -1,15 +1,14 @@
-import common.Util;
 
 public class Hiker {
   private String id;
-  private int speed;
+  private double speed;
 
-  public Hiker(String id, int speed) {
+  public Hiker(String id, double speed) {
     this.id = id;
     this.speed = speed;
   }
 
-  public int getSpeed() {
+  public double getSpeed() {
     return speed;
   }
 
