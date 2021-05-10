@@ -7,13 +7,19 @@
  
 
  ## Methodology
-   Given the problem paremeters the approach for the bridge crsosing is the following premise: The Hiker with the fastest speed is the torchbearer and makes consecutive runs back and forth on the bridge until the whole party is across, minimizing the time of the walk back to the beginning of the bridge. Hence it would make the most sense to implement a Max-Heap representation giving priority to the hiker eith the greatest speed. 
+   Given the problem paremeters, the approach for the bridge crsosing is the following premise: The Hiker with the fastest speed is the torchbearer and makes consecutive runs back and forth on the bridge until the whole party is across, minimizing the time of the walk back to the beginning of the bridge. Hence it would make the most sense to implement a Max-Heap representation giving priority to the hiker with the greatest speed. In terms of the bridges, because they follow some specific order relative to one another, we could use a singly linked list setup so that we could simulate each bridge crossing. 
+
    In the senario where there is an additional hiker at the end of the bridge,if the new hiker's speed is faster than the torchbearer, than they become the torch bearer and continues in the algorithm .
- ### Bridge Class
-    A bridge will be classified by three parameters: an identifying name, its length, and the as additional hiker at the beginning of the bridge to be picked up by the group.
- -**getTravelTime()**:
-    returns the total travel time taken across the bridge by the group, which in this scenario is the 
-        **bridge length / (speed of slowest hiker)** 
-        
+
+
+
+  ## Testing Strategy
+    In terms of testing, there are key scenarios we have to check in order to adequately work out everycase of this problem:
+      -When there is one hiker, one bridge, and no additional hikers
+      -When there is one hiker, one bridge, and an additional hiker
+      -When there is multiple hikers, and one bridge.
+      -When it starts off with one Hiker and an additional hiker is added at every bridge
+      -When there are multiple hikers and multiple bridges
+      
 
   
