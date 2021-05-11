@@ -31,19 +31,14 @@ class maxHeap {
       return this.heap.pop();
     } else return null;
   }
-  /**
-   * This function restores the heap property after a node is removed. It swaps the values of the parent nodes with the values of their largest child nodes until the heap property is restored. The time complexity of this function is in O(log(n)) because that is the maximum number of nodes that would have to be traversed and/or swapped.
-   */
+
   __maxHeapify(index) {
     while (true) {
       let leftChild = (index * 2) + 1;
       let rightChild = leftChild + 1;
       let largest = index;
-      // if the leftChild exists & index value is less the left child, set the largest to leftChild
-      if (this.heap.length > leftChild && this.heap[largest] < this.heap[leftChild]) largest = leftChild;
-      // if the rightChild exists & index value is less the right child, set the largest to rightChild
-      if (this.heap.length > rightChild && this.heap[largest] < this.heap[rightChild]) largest = rightChild;
-      // if root/parent is not largest, then swap with the largest
+      if (this.heap.length > leftChild && (this.heap[largest]).speed < (this.heap[leftChild].speed)) largest = leftChild;
+      if (this.heap.length > rightChild && (this.heap[largest]).speed < (this.heap[rightChild]).speed) largest = rightChild;
       if (largest !== index) {
         let temp = this.heap[largest];
         this.heap[largest] = this.heap[index];
@@ -57,13 +52,10 @@ class maxHeap {
    * This function restores heap property by swapping the value at a parent node if it is less than the value at a child node. The time complexity of this function is in O(log(n)) because that is the maximum number of nodes that would have to be traversed and/or swapped.
    */
   __bubbleUp(index) {
-    //Fetch the element that has to be moved
     const element = this.heap[index];
     while (index > 0) {
-      // Find the parent element's index and fetch it
       let parentIndex = Math.floor((index - 1) / 2);
       let parent = this.heap[parentIndex];
-      // if parent is lesser than child,then swap
       if (parent.speed <= element.speed) {
         this.heap[parentIndex] = element;
         this.heap[index] = parent;
