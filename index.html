@@ -13,9 +13,12 @@
 </style>
 
 <script>
+  var hikerGroup;
+  var bridges;
+
   // Creates a set of 1 to 50 Bridges speeds up to 100 ft/min.
   function generateRandomHikers() {
-    var hikerGroup = new maxHeap();
+    hikerGroup = new maxHeap();
     h = [];
     var hSize = Math.ceil(Math.random() * 50);
     for (i = 0; i < rlength; i++) {
@@ -27,7 +30,7 @@
 
   // Creates a set of 1 to 100 random bridges with lengths up to 300 ft. 
   function generateRandomBridges() {
-    var bridges = [];
+    bridges = [];
     var rlength = Math.ceil(Math.random() * 100);
     for (i = 0; i < rlength; i++) {
       bridges.add(new Bridge("B" + i, Math.ceil(Math.random() * 300)));
@@ -58,9 +61,6 @@
     print(bridge.report());
     return timeTotal;
   }
-
-
-
 
 
   class Bridge {
@@ -128,25 +128,19 @@
       this.heap = [];
     }
     insert(val) {
-      //create a new child at the end of the heap
       this.heap.push(val);
       let index = this.heap.length - 1;
       this.__bubbleUp(index);
     }
-    /**
-     * This function returns the maximum value in the heap which is the root, i.e., the first value in the array. It does not modify the heap itself. The time complexity of this function is in O(1) constant time.
-     */
+
     getMax() {
       if (this.heap.length != 0) return this.heap[0];
       return null;
     }
-    /**
-     * This function removes and returns the maximum value in the heap. The time complexity of this function is in O(log(n)) because that is the maximum number of nodes that would have to be traversed and/or swapped.
-     */
+
     removeMax() {
       if (this.heap.length > 1) {
         let max = this.heap[0];
-        // move the last child node to root
         this.heap[0] = this.heap.pop();
         this.__maxHeapify(0);
         return max;
