@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html>
 <h1>Welcome to Bridge Hikers</h1>
+
 <button class="main" style="position: absolute; size: 200px;"> Random input</button>
 <button class="main" style="position: fixed; size: 200px; right: 0;"> Custom input</button>
-<div id="">
-  <input> <input type="text">
-  <input type="submit" value="Submit">
-</div>
+
+<body>
+  <div id="cHikers">
+    <label> Add Hikers format(id , speed) </label>
+    <input> <input type="text">
+    <input type="submit" onclick="generateHikers" value="Submit">
+  </div>
+  <div id="cBridges">
+    <label> Add Bridge lengths </label>
+    <input> <input type="text">
+    <input type="submit" onclick="generateBridges" value="Submit">
+  </div>
+  <div id="results">
+    <h2>Results</h2>
+    <span id="readout"></span>
+    <span id="tTotal">Total Time: </span>
+  </div>
+</body>
 
 </html>
+
 <style>
 </style>
 
 <script>
   var hikerGroup;
   var bridges;
+  // probability that a bridge will have an additional hiker
+  var threshold = 0.3
 
   // Creates a set of 1 to 50 Bridges speeds up to 100 ft/min.
   function generateRandomHikers() {
     hikerGroup = new maxHeap();
-    h = [];
+    var h = [];
     var hSize = Math.ceil(Math.random() * 50);
     for (i = 0; i < rlength; i++) {
       h.add(new Hiker("H" + i, Math.ceil(Math.random() * 100)));
@@ -33,12 +51,17 @@
     bridges = [];
     var rlength = Math.ceil(Math.random() * 100);
     for (i = 0; i < rlength; i++) {
-      bridges.add(new Bridge("B" + i, Math.ceil(Math.random() * 300)));
+      var b = new Bridge("B" + i, Math.ceil(Math.random() * 300));
+      var chance = Math.random();
+      if (chance <= threshold)
+        b.newHiker = new Hiker(("H" + Math.random() * 1000), Math.ceil(Math.random() * 100));
+      bridges.add(b);
     }
     return bridges;
 
   }
   function generateHikers() {
+
 
   }
   function generateBridges() { }
@@ -46,7 +69,7 @@
   function getBridgeTime(hikers, bridges) {
     var torchbearer = hikers.removeMax();
     var currentBridge = bridges.head;
-    var timeTotal;
+    var bridgeTime;
     currentBridge.addHiker(torchbearer);
     hikers.forEach(hiker => {
       crossingTime = (bridge.length / hiker.speed);
@@ -56,9 +79,9 @@
           torchbearer = bridges.next.newHiker
       }
       crossingTime += (bridge.length / tourchbearer.speed);
-      timeTotal += crossingTime;
+      bridgeTime += crossingTime;
     });
-    print(bridge.report());
+    document.getElementById("readout").innerHTML += (bridge.report() + "in " + bridgeTime + "minutes \n");
     return timeTotal;
   }
 

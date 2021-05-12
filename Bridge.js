@@ -8,25 +8,15 @@ class Bridge {
     newHiker = null;
 
     this.report = function () {
-      return "Bridge " + this.name + "of length " + this.length + "ft. was crossed by /n"
-        + ((this.ledger.toArray()).toString()) + "/n" + "with a total of " + this.hikers + "hikers";
+      bResult = "Bridge " + this.name + "of length " + this.length + "ft. was crossed by" + this.hikers + "hikers"
+        + ((this.ledger.toArray()).toString());
+      if (newHiker != null)
+        return "Hiker:(Id" + newHiker.id + ", Speed: " + newHiker.speed + "ft/min.) added! \n" + bResult;
+      return bResult;
     }
 
   }
 
-  Bridge(name, length, hiker) {
-    this.length = length;
-    hikers = 0;
-    ledger = [];
-    this.name = name;
-    newHiker = h;
-
-    this.report = function () {
-      return "Bridge " + this.name + "of length " + this.length + "ft. was crossed by /n"
-        + ((this.ledger.toArray()).toString()) + "/n" + "with a total of " + this.hikers + "hikers";
-    }
-
-  }
 
 
   addHiker = function (hiker) {
