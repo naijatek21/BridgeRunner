@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-<h1>Welcome to Bridge Hikers</h1>
 
-<button class="main" style="position: absolute; size: 200px;" onclick="generateRandomHikers(); generateRandomBridges()">
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<h1 class="header">Welcome to Bridge Hikers</h1>
+<button class="main" style="position: static; size: 200px;" onclick="generateRandomHikers(); generateRandomBridges()">
   Random input</button>
-<button class="main" style="position: fixed; size: 200px; right: 0;"> Custom input</button>
+<button class="main" style="position: absolute; size: 200px; left: 400;"> Custom input</button>
 
 <body>
-  <div id="cHikers">
-    <label> Add Hikers format(id , speed) </label>
-    <input id="hikerinput"> <input type="text">
+  <div class="custom" id="cHikers">
+    <label> Add Hikers </label>
+    <input class="h-input"> <input type="text" placeholder="(id #1 , speed #1 ),(id #2, speed#2) ... ">
     <input type="submit" onclick="generateHikers()" value="Submit">
   </div>
-  <div id="cBridges">
-    <label> Add Bridge lengths in ft. (separte with commas) </label>
-    <input id="bridgeinput"> <input type="text">
+  <div class="custom" id="cBridges">
+    <label> Add Bridge lengths </label>
+    <input class="b-input"> <input type="text" placeholder="100,200,300 ...(in ft.) ">
     <input type="submit" onclick="generateBridges()" value="Submit">
   </div>
-  <div id="results">
-    <h2>Results</h2>
+  <div class="res" id="results">
+    <h2>
+      <bold>Results</bold>
+    </h2>
     <div id="readout"></div>
-    <span id="tTotal">Total Time: </span>
+    <span id="tTotal">
+      <bold>Total Time:</bold>
+    </span>
   </div>
 </body>
 
 </html>
-
-<style>
-</style>
 
 <script>
   var hikerGroup;
