@@ -5,20 +5,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <h1 class="header">Welcome to Bridge Hikers</h1>
-<button class="main" style="position: static; size: 200px;" onclick="generateRandomHikers(); generateRandomBridges()">
+<button class="main" style="position: static; size: 200px;"
+  onclick="generateRandomHikers(); generateRandomBridges(); getBridgeTime() ">
   Random input</button>
 <button class="main" style="position: absolute; size: 200px; right: -250 px;"> Custom input</button>
 
 <body>
-  <div class="custom" id="cHikers">
+  <div class="custom">
     <label> Add Hikers </label>
     <input class="h-input" type="text" placeholder="(id #1 , speed #1 ),(id #2, speed#2) ... ">
-    <input type="submit" onclick="generateHikers()" value="Submit">
-  </div>
-  <div class="custom" id="cBridges">
     <label> Add Bridge lengths </label>
     <input class="b-input" type="text" placeholder="100,200,300 ...(in ft.) ">
-    <input type="submit" onclick="generateBridges()" value="Submit">
+    <input type="submit" onclick="generateBridges();generateHikers();getBridgeTime()" value="Submit">
   </div>
   <div class="res" id="results">
     <h2>
@@ -85,7 +83,7 @@
 
   }
 
-  function getBridgeTime(hikers, bridges) {
+  function getBridgeTime() {
     var torchbearer = hikers.removeMax();
     var totalTime = 0;
     for (i = 0; i < bridges.length; i++) {
