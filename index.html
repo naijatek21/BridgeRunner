@@ -7,17 +7,17 @@
 <h1 class="header">Welcome to Bridge Hikers</h1>
 <button class="main" style="position: static; size: 200px;" onclick="generateRandomHikers(); generateRandomBridges()">
   Random input</button>
-<button class="main" style="position: absolute; size: 200px; left: 400;"> Custom input</button>
+<button class="main" style="position: absolute; size: 200px; right: -250 px;"> Custom input</button>
 
 <body>
   <div class="custom" id="cHikers">
     <label> Add Hikers </label>
-    <input class="h-input"> <input type="text" placeholder="(id #1 , speed #1 ),(id #2, speed#2) ... ">
+    <input class="h-input" type="text" placeholder="(id #1 , speed #1 ),(id #2, speed#2) ... ">
     <input type="submit" onclick="generateHikers()" value="Submit">
   </div>
   <div class="custom" id="cBridges">
     <label> Add Bridge lengths </label>
-    <input class="b-input"> <input type="text" placeholder="100,200,300 ...(in ft.) ">
+    <input class="b-input" type="text" placeholder="100,200,300 ...(in ft.) ">
     <input type="submit" onclick="generateBridges()" value="Submit">
   </div>
   <div class="res" id="results">
@@ -45,7 +45,7 @@
     var h = [];
     var hSize = Math.ceil(Math.random() * 50);
     for (i = 0; i < rlength; i++) {
-      h.add(new Hiker("H" + i, Math.ceil(Math.random() * 100)));
+      h.insert(new Hiker("H" + i, Math.ceil(Math.random() * 100)));
     }
     hikerGroup.buildHeap(h);
     return hikerGroup;
@@ -71,7 +71,7 @@
     var rawData = (document.getElementById("hikerinput").value).split("\n");
     rawData.forEach(pair => {
       data = pair.split(",");
-      h.add(new Hiker(data[0], parseFloat(data[1])));
+      h.insert(new Hiker(data[0], parseFloat(data[1])));
     });
     hikerGroup.buildHeap(h);
     return hikerGroup;
