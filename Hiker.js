@@ -1,6 +1,7 @@
 
-function Hiker(id, speed) {
-  this.id = id;
-  this.speed = speed;
+class Hiker {
+  Hiker(id, speed) {
+    this.id = id;
+    this.speed = speed;
+  }
 }
-

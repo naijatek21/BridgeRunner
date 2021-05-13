@@ -2,23 +2,24 @@
 <html>
 <h1>Welcome to Bridge Hikers</h1>
 
-<button class="main" style="position: absolute; size: 200px;"> Random input</button>
+<button class="main" style="position: absolute; size: 200px;" onclick="generateRandomHikers(); generateRandomBridges()">
+  Random input</button>
 <button class="main" style="position: fixed; size: 200px; right: 0;"> Custom input</button>
 
 <body>
   <div id="cHikers">
     <label> Add Hikers format(id , speed) </label>
-    <input> <input type="text">
-    <input type="submit" onclick="generateHikers" value="Submit">
+    <input id="hikerinput"> <input type="text">
+    <input type="submit" onclick="generateHikers()" value="Submit">
   </div>
   <div id="cBridges">
-    <label> Add Bridge lengths </label>
-    <input> <input type="text">
-    <input type="submit" onclick="generateBridges" value="Submit">
+    <label> Add Bridge lengths in ft. (separte with commas) </label>
+    <input id="bridgeinput"> <input type="text">
+    <input type="submit" onclick="generateBridges()" value="Submit">
   </div>
   <div id="results">
     <h2>Results</h2>
-    <span id="readout"></span>
+    <div id="readout"></div>
     <span id="tTotal">Total Time: </span>
   </div>
 </body>
@@ -32,7 +33,7 @@
   var hikerGroup;
   var bridges;
   // probability that a bridge will have an additional hiker
-  var threshold = 0.3
+  var threshold = 0.3;
 
   // Creates a set of 1 to 50 Bridges speeds up to 100 ft/min.
   function generateRandomHikers() {
@@ -61,66 +62,73 @@
 
   }
   function generateHikers() {
-
+    hikerGroup = new maxHeap();
+    var h = [];
+    var rawData = (document.getElementById("hikerinput").value).split("\n");
+    rawData.forEach(pair => {
+      data = pair.split(",");
+      h.add(new Hiker(data[0], parseFloat(data[1])));
+    });
+    hikerGroup.buildHeap(h);
+    return hikerGroup;
+  }
+  function generateBridges() {
+    bridges = [];
+    var rawData = (document.getElementById("bridgeinput").value).split("\n");
+    rawData.forEach(len => {
+      bridges.add(new Bridge(parseFloat(len)));
+    });
 
   }
-  function generateBridges() { }
 
   function getBridgeTime(hikers, bridges) {
     var torchbearer = hikers.removeMax();
-    var currentBridge = bridges.head;
-    var bridgeTime;
-    currentBridge.addHiker(torchbearer);
-    hikers.forEach(hiker => {
-      crossingTime = (bridge.length / hiker.speed);
-      currentBridge.addHiker(hiker);
-      if (bridges.next.pickup() != null) {
-        if (bridges.next.newHiker.speed > torchbearer.speed)
-          torchbearer = bridges.next.newHiker
-      }
-      crossingTime += (bridge.length / tourchbearer.speed);
-      bridgeTime += crossingTime;
-    });
-    document.getElementById("readout").innerHTML += (bridge.report() + "in " + bridgeTime + "minutes \n");
-    return timeTotal;
+    var totalTime = 0;
+    for (i = 0; i < bridges.length; i++) {
+      var bridgeTime;
+      bridges[i].addHiker(torchbearer);
+      hikers.forEach(hiker => {
+        crossingTime = (bridges[i].length / hiker.speed);
+        currentBridge.addHiker(hiker);
+        if (bridges[i + 1].pickup() != null) {
+          if (bridges[i + 1].newHiker.speed > torchbearer.speed)
+            torchbearer = bridges[i + 1].newHiker
+        }
+        crossingTime += (bridge.length / torchbearer.speed);
+        bridgeTime += crossingTime;
+        document.getElementById("readout").innerHTML += ("<span>" + bridge.report() + "in " + bridgeTime + " minutes</span>");
+        totalTime += bridgeTime;
+      });
+      document.getElementById("tTotal").innerHTML += totalTime + "minutes";
+    }
   }
 
 
+  class Hiker {
+    Hiker(id, speed) {
+      this.id = id;
+      this.speed = speed;
+    }
+  }
+
   class Bridge {
-    Bridge(name, length) {
+    Bridge(length) {
       this.length = length;
       hikers = 0;
       ledger = [];
-      this.name = name;
       newHiker = null;
 
       this.report = function () {
-        return "Bridge " + this.name + "of length " + this.length + "ft. was crossed by /n"
+        return "Bridge of length " + this.length + "ft. was crossed by /n"
           + ((this.ledger.toArray()).toString()) + "/n" + "with a total of " + this.hikers + "hikers";
       }
 
     }
-
-    Bridge(name, length, hiker) {
-      this.length = length;
-      hikers = 0;
-      ledger = [];
-      this.name = name;
-      newHiker = h;
-
-      this.report = function () {
-        return "Bridge " + this.name + "of length " + this.length + "ft. was crossed by /n"
-          + ((this.ledger.toArray()).toString()) + "/n" + "with a total of " + this.hikers + "hikers";
-      }
-
-    }
-
 
     addHiker = function (hiker) {
-      ledger.add(hiker.getId());
+      ledger.add(hiker.id);
       this.hikers += 1;
     }
-
 
     pickup = function () {
       h = this.newHiker;
@@ -129,20 +137,6 @@
     }
 
 
-  }
-
-
-
-  class ListNode {
-    constructor(data) {
-      this.data = data
-      this.next = null
-    }
-  }
-  class LinkedList {
-    constructor(head = null) {
-      this.head = head
-    }
   }
 
 
